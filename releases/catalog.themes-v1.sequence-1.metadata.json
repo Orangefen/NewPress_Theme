@@ -1,0 +1,10 @@
+{
+  "theme/nexora@1.0.1": {
+    "notes": "Nexora 1.0.1：独立主题仓库发行。\n\n新增主题市场封面与发行元数据。主题源码、测试和打包流程从主程序分离，使用 public/v1 契约；原有 52 项主题设置兼容并保留。",
+    "release": {
+      "channel": "stable",
+      "published_at": "2026-11-16T11:58:01.7628278Z",
+      "data_compatible": true
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{{define "header"}}
+<header class="site-header" data-header>
+  <a class="brand" href="/" aria-label="{{.Site.Title}} 首页">{{if .Settings.logo_image}}<img class="custom-logo" src="{{.Settings.logo_image}}" alt="" width="32" height="34">{{else}}{{template "brand-mark" .}}{{end}}<span>{{.Site.Title}}</span></a>
+  <nav class="primary-nav" id="primary-nav" aria-label="主导航">
+    {{with index .Navigation "primary"}}{{if .Configured}}{{range .Items}}{{template "nav-link" .}}{{end}}{{else}}{{template "default-nav" $}}{{end}}{{else}}{{template "default-nav" .}}{{end}}
+  </nav>
+  <div class="header-actions"><a class="icon-button search-trigger" href="/explore/" aria-label="搜索" data-search-open>{{template "icon-search" .}}</a><a class="outline-button contact-button" href="{{.Settings.contact_link}}">联系我们{{template "icon-arrow" .}}</a><button class="icon-button menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="展开主导航" data-menu-toggle>{{template "icon-menu" .}}</button></div>
+</header>
+{{end}}
+{{define "default-nav"}}<a href="/"{{if eq .Kind "home"}} aria-current="page"{{end}}>首页</a><a href="/#about">关于我们</a><a href="/#business">核心业务</a><a href="/#innovation">技术创新</a><a href="/explore/"{{if eq .Kind "explore"}} aria-current="page"{{end}}>新闻中心</a><a href="/#careers">加入我们</a>{{end}}
+{{define "nav-link"}}{{if .Children}}<details class="nav-group"><summary>{{.Label}}</summary><div class="nav-dropdown"><a href="{{.URL}}"{{if .NewWindow}} target="_blank" rel="noopener noreferrer"{{else if .Rel}} rel="{{.Rel}}"{{end}}{{if .Active}} aria-current="page"{{end}}>{{.Label}}</a>{{range .Children}}{{template "nav-link" .}}{{end}}</div></details>{{else}}<a href="{{.URL}}"{{if .Active}} aria-current="page"{{end}}{{if .NewWindow}} target="_blank" rel="noopener noreferrer"{{else if .Rel}} rel="{{.Rel}}"{{end}}>{{.Label}}</a>{{end}}{{end}}

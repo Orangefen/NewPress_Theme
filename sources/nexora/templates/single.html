@@ -1,0 +1,6 @@
+{{define "content"}}
+<article class="article-shell"><header class="article-header"><a class="eyebrow article-back" href="{{if eq .Kind "page"}}/{{else}}/explore/{{end}}">{{if eq .Kind "page"}}HOME / ABOUT{{else}}NEWS & INSIGHTS{{end}}</a>{{if .IsPreview}}<p class="preview-notice" role="status">草稿预览 · 仅供审核</p>{{end}}<h1>{{.Post.Title}}</h1>{{if ne .Kind "page"}}<p class="article-meta"><time datetime="{{date .Post.PublishedAt}}">{{date .Post.PublishedAt}}</time>{{if .Post.AuthorName}}<span>·</span><a href="{{.Post.AuthorURL}}">{{.Post.AuthorName}}</a>{{end}}{{if .Post.Category}}<span>·</span><span>{{.Post.Category}}</span>{{end}}</p>{{end}}{{if .Post.Excerpt}}<p class="article-lead">{{.Post.Excerpt}}</p>{{end}}</header>
+{{if .Post.CoverURL}}<img class="article-cover" src="{{.Post.CoverURL}}" alt="" width="1200" height="680">{{end}}<div class="prose">{{safeHTML .Post.ContentHTML}}</div>
+{{if .Post.Tags}}<nav class="article-tags" aria-label="文章标签">{{range .Post.Tags}}<a href="{{.URL}}"># {{.Name}}</a>{{end}}</nav>{{end}}</article>
+{{if and (not .IsPreview) (ne .Kind "page")}}{{if index .Modules "comments"}}{{template "comments" .}}{{end}}{{end}}
+{{end}}

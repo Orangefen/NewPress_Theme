@@ -1,0 +1,647 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "accent": {
+      "type": "string",
+      "title": "强调色",
+      "default": "#304b68",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "visual",
+        "control": "color",
+        "order": 0,
+        "css_variable": "--accent"
+      },
+      "pattern": "^#[0-9a-fA-F]{6}$"
+    },
+    "contact_link": {
+      "type": "string",
+      "title": "页眉联系按钮链接",
+      "default": "/#contact",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "visual",
+        "control": "text",
+        "order": 10
+      },
+      "format": "uri-reference"
+    },
+    "hero_title": {
+      "type": "string",
+      "title": "第一张 · 标题第一行",
+      "default": "以科技之名",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "hero",
+        "control": "text",
+        "order": 20
+      }
+    },
+    "hero_title_second": {
+      "type": "string",
+      "title": "第一张 · 标题第二行",
+      "default": "探索更大的未来",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "hero",
+        "control": "text",
+        "order": 30
+      }
+    },
+    "hero_subtitle": {
+      "type": "string",
+      "title": "第一张 · 副标题",
+      "default": "引领创新 · 连接世界 · 共创可持续的明天",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "hero",
+        "control": "text",
+        "order": 40
+      }
+    },
+    "hero_button": {
+      "type": "string",
+      "title": "第一张 · 按钮文字",
+      "default": "了解更多",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "hero",
+        "control": "text",
+        "order": 50
+      }
+    },
+    "hero_link": {
+      "type": "string",
+      "title": "第一张 · 按钮链接",
+      "default": "/#about",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "hero",
+        "control": "text",
+        "order": 60
+      },
+      "format": "uri-reference"
+    },
+    "hero_image": {
+      "type": "string",
+      "title": "第一张 · 背景图片",
+      "default": "",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "hero",
+        "control": "text",
+        "order": 70
+      },
+      "description": "填写媒体库图片地址；留空使用内置建筑背景。建议约 2.09:1 的横向照片。",
+      "format": "uri-reference"
+    },
+    "second_title": {
+      "type": "string",
+      "title": "第二张 · 标题第一行",
+      "default": "让每一次连接",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "hero",
+        "control": "text",
+        "order": 80
+      }
+    },
+    "second_title_second": {
+      "type": "string",
+      "title": "第二张 · 标题第二行",
+      "default": "打开新的可能",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "hero",
+        "control": "text",
+        "order": 90
+      }
+    },
+    "second_subtitle": {
+      "type": "string",
+      "title": "第二张 · 副标题",
+      "default": "融合技术与洞察 · 与产业共同向前",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "hero",
+        "control": "text",
+        "order": 100
+      }
+    },
+    "third_title": {
+      "type": "string",
+      "title": "第三张 · 标题第一行",
+      "default": "向更远处探索",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "hero",
+        "control": "text",
+        "order": 110
+      }
+    },
+    "third_title_second": {
+      "type": "string",
+      "title": "第三张 · 标题第二行",
+      "default": "与更好的明天同行",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "hero",
+        "control": "text",
+        "order": 120
+      }
+    },
+    "third_subtitle": {
+      "type": "string",
+      "title": "第三张 · 副标题",
+      "default": "以长期的眼光 · 回应时代的命题",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "hero",
+        "control": "text",
+        "order": 130
+      }
+    },
+    "about_title": {
+      "type": "string",
+      "title": "标题",
+      "default": "关于我们",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "about",
+        "control": "text",
+        "order": 140
+      }
+    },
+    "about_description": {
+      "type": "string",
+      "title": "介绍文案",
+      "default": "致力于通过前沿科技与卓越的产品服务，\n为全球用户创造更大价值，推动行业与社会的可持续发展。",
+      "maxLength": 1200,
+      "x-newpress": {
+        "group": "about",
+        "control": "textarea",
+        "order": 150
+      }
+    },
+    "about_image": {
+      "type": "string",
+      "title": "建筑图片",
+      "default": "",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "about",
+        "control": "text",
+        "order": 160
+      },
+      "description": "填写媒体库图片地址；留空使用参考图中的建筑照片。也用于第二张轮播。",
+      "format": "uri-reference"
+    },
+    "about_button": {
+      "type": "string",
+      "title": "按钮文字",
+      "default": "深入了解",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "about",
+        "control": "text",
+        "order": 170
+      }
+    },
+    "about_link": {
+      "type": "string",
+      "title": "按钮链接",
+      "default": "/#innovation",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "about",
+        "control": "text",
+        "order": 180
+      },
+      "format": "uri-reference"
+    },
+    "strengths_title": {
+      "type": "string",
+      "title": "标题",
+      "default": "我们的优势",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "strengths",
+        "control": "text",
+        "order": 190
+      }
+    },
+    "strengths_subtitle": {
+      "type": "string",
+      "title": "副标题",
+      "default": "以专业构筑信任，用创新驱动未来",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "strengths",
+        "control": "text",
+        "order": 200
+      }
+    },
+    "strength_1_title": {
+      "type": "string",
+      "title": "优势 1 · 标题",
+      "default": "核心技术",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "strengths",
+        "control": "text",
+        "order": 210
+      }
+    },
+    "strength_1_text": {
+      "type": "string",
+      "title": "优势 1 · 说明",
+      "default": "持续创新，引领行业",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "strengths",
+        "control": "text",
+        "order": 220
+      }
+    },
+    "strength_2_title": {
+      "type": "string",
+      "title": "优势 2 · 标题",
+      "default": "全球布局",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "strengths",
+        "control": "text",
+        "order": 230
+      }
+    },
+    "strength_2_text": {
+      "type": "string",
+      "title": "优势 2 · 说明",
+      "default": "立足全球，服务世界",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "strengths",
+        "control": "text",
+        "order": 240
+      }
+    },
+    "strength_3_title": {
+      "type": "string",
+      "title": "优势 3 · 标题",
+      "default": "品质卓越",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "strengths",
+        "control": "text",
+        "order": 250
+      }
+    },
+    "strength_3_text": {
+      "type": "string",
+      "title": "优势 3 · 说明",
+      "default": "精益求精，追求极致",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "strengths",
+        "control": "text",
+        "order": 260
+      }
+    },
+    "strength_4_title": {
+      "type": "string",
+      "title": "优势 4 · 标题",
+      "default": "人才驱动",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "strengths",
+        "control": "text",
+        "order": 270
+      }
+    },
+    "strength_4_text": {
+      "type": "string",
+      "title": "优势 4 · 说明",
+      "default": "汇聚精英，共创未来",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "strengths",
+        "control": "text",
+        "order": 280
+      }
+    },
+    "innovation_title": {
+      "type": "string",
+      "title": "标题",
+      "default": "以不止步的探索，抵达更远的未来",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "innovation",
+        "control": "text",
+        "order": 290
+      }
+    },
+    "innovation_description": {
+      "type": "string",
+      "title": "描述",
+      "default": "让前沿技术走进真实世界，让每一次创新拥有长远价值。",
+      "maxLength": 500,
+      "x-newpress": {
+        "group": "innovation",
+        "control": "textarea",
+        "order": 300
+      }
+    },
+    "innovation_image": {
+      "type": "string",
+      "title": "山峦图片",
+      "default": "",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "innovation",
+        "control": "text",
+        "order": 310
+      },
+      "description": "留空使用内置山峦背景；也用于第三张轮播。",
+      "format": "uri-reference"
+    },
+    "business_title": {
+      "type": "string",
+      "title": "标题",
+      "default": "让科技，成为向前的力量",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "business",
+        "control": "text",
+        "order": 320
+      }
+    },
+    "business_description": {
+      "type": "string",
+      "title": "描述",
+      "default": "从技术突破到产业应用，\n以开放协作，回应不断变化的世界。",
+      "maxLength": 500,
+      "x-newpress": {
+        "group": "business",
+        "control": "textarea",
+        "order": 330
+      }
+    },
+    "business_1_title": {
+      "type": "string",
+      "title": "业务 1 · 标题",
+      "default": "智能科技",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "business",
+        "control": "text",
+        "order": 340
+      }
+    },
+    "business_1_text": {
+      "type": "string",
+      "title": "业务 1 · 说明",
+      "default": "连接数据与场景，以智能技术解决复杂问题，让效率与体验共同进化。",
+      "maxLength": 600,
+      "x-newpress": {
+        "group": "business",
+        "control": "textarea",
+        "order": 350
+      }
+    },
+    "business_1_link": {
+      "type": "string",
+      "title": "业务 1 · 详情链接",
+      "default": "/#contact",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "business",
+        "control": "text",
+        "order": 360
+      },
+      "description": "发布企业介绍页面后，可填写对应的 /pages/页面别名。",
+      "format": "uri-reference"
+    },
+    "business_2_title": {
+      "type": "string",
+      "title": "业务 2 · 标题",
+      "default": "数字连接",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "business",
+        "control": "text",
+        "order": 370
+      }
+    },
+    "business_2_text": {
+      "type": "string",
+      "title": "业务 2 · 说明",
+      "default": "打通人与信息的边界，构建可靠、协同的数字体验，让价值自由流动。",
+      "maxLength": 600,
+      "x-newpress": {
+        "group": "business",
+        "control": "textarea",
+        "order": 380
+      }
+    },
+    "business_2_link": {
+      "type": "string",
+      "title": "业务 2 · 详情链接",
+      "default": "/#contact",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "business",
+        "control": "text",
+        "order": 390
+      },
+      "description": "发布企业介绍页面后，可填写对应的 /pages/页面别名。",
+      "format": "uri-reference"
+    },
+    "business_3_title": {
+      "type": "string",
+      "title": "业务 3 · 标题",
+      "default": "可持续创新",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "business",
+        "control": "text",
+        "order": 400
+      }
+    },
+    "business_3_text": {
+      "type": "string",
+      "title": "业务 3 · 说明",
+      "default": "在每一次设计与实践中兼顾当下与未来，让科技与环境和谐共生。",
+      "maxLength": 600,
+      "x-newpress": {
+        "group": "business",
+        "control": "textarea",
+        "order": 410
+      }
+    },
+    "business_3_link": {
+      "type": "string",
+      "title": "业务 3 · 详情链接",
+      "default": "/#contact",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "business",
+        "control": "text",
+        "order": 420
+      },
+      "description": "发布企业介绍页面后，可填写对应的 /pages/页面别名。",
+      "format": "uri-reference"
+    },
+    "careers_title": {
+      "type": "string",
+      "title": "人才标题",
+      "default": "和我们一起，创造下一种可能",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "careers",
+        "control": "text",
+        "order": 430
+      }
+    },
+    "careers_description": {
+      "type": "string",
+      "title": "人才描述",
+      "default": "让好奇心成为起点，让不同的想法在这里相遇。",
+      "maxLength": 500,
+      "x-newpress": {
+        "group": "careers",
+        "control": "textarea",
+        "order": 440
+      }
+    },
+    "careers_button": {
+      "type": "string",
+      "title": "人才按钮文字",
+      "default": "加入我们",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "careers",
+        "control": "text",
+        "order": 450
+      }
+    },
+    "careers_link": {
+      "type": "string",
+      "title": "人才按钮链接",
+      "default": "/#contact",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "careers",
+        "control": "text",
+        "order": 460
+      },
+      "format": "uri-reference"
+    },
+    "contact_title": {
+      "type": "string",
+      "title": "合作标题",
+      "default": "从一次对话，开启新的未来",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "careers",
+        "control": "text",
+        "order": 470
+      }
+    },
+    "contact_description": {
+      "type": "string",
+      "title": "合作描述",
+      "default": "期待与你交流，携手探索更多可能。",
+      "maxLength": 500,
+      "x-newpress": {
+        "group": "careers",
+        "control": "textarea",
+        "order": 480
+      }
+    },
+    "contact_action_label": {
+      "type": "string",
+      "title": "合作按钮文字",
+      "default": "联系我们",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "careers",
+        "control": "text",
+        "order": 490
+      }
+    },
+    "contact_action_url": {
+      "type": "string",
+      "title": "合作按钮链接",
+      "default": "",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "careers",
+        "control": "text",
+        "order": 500
+      },
+      "description": "留空时根据核心模块状态进入在线留言或用户中心。可填写企业联系页面或 HTTPS 链接。",
+      "format": "uri-reference"
+    },
+    "logo_image": {
+      "type": "string",
+      "title": "页眉与页脚标志图片",
+      "description": "可填写媒体库中的透明图片。留空使用 N 形标志；品牌文字始终取核心站点名称。",
+      "default": "",
+      "format": "uri-reference",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "visual",
+        "control": "text",
+        "order": 5
+      }
+    }
+  },
+  "x-newpress": {
+    "version": 1,
+    "groups": [
+      {
+        "id": "visual",
+        "title": "视觉与导航",
+        "icon": "palette",
+        "order": 0
+      },
+      {
+        "id": "hero",
+        "title": "首屏与轮播",
+        "icon": "image",
+        "order": 10
+      },
+      {
+        "id": "about",
+        "title": "关于我们",
+        "icon": "building",
+        "order": 20
+      },
+      {
+        "id": "strengths",
+        "title": "我们的优势",
+        "icon": "sparkles",
+        "order": 30
+      },
+      {
+        "id": "innovation",
+        "title": "创新愿景",
+        "icon": "mountain",
+        "order": 40
+      },
+      {
+        "id": "business",
+        "title": "核心业务",
+        "icon": "layers",
+        "order": 50
+      },
+      {
+        "id": "careers",
+        "title": "人才与合作",
+        "icon": "users",
+        "order": 60
+      }
+    ]
+  }
+}

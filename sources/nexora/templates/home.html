@@ -1,0 +1,42 @@
+{{define "content"}}
+<section class="hero" aria-label="企业愿景" aria-roledescription="轮播" data-hero>
+  <div class="hero-slide" id="hero-slide-1" role="group" aria-roledescription="幻灯片" aria-label="第 1 张，共 3 张" data-slide>
+    <img class="hero-image" src="{{assetOr .Settings.hero_image "images/headquarters.webp"}}"{{if not .Settings.hero_image}} srcset="{{asset "images/headquarters-mobile.webp"}} 960w, {{asset "images/headquarters.webp"}} 1881w" sizes="(max-width: 760px) 1440px, 100vw"{{end}} alt="暮色中的玻璃科技园区与水面倒影" width="1920" height="919" fetchpriority="high">
+    <div class="hero-copy"><h1><span>{{.Settings.hero_title}}</span><span>{{.Settings.hero_title_second}}</span></h1><p>{{.Settings.hero_subtitle}}</p><a class="outline-button" href="{{.Settings.hero_link}}">{{.Settings.hero_button}}{{template "icon-arrow" .}}</a></div>
+  </div>
+  <div class="hero-slide" id="hero-slide-2" role="group" aria-roledescription="幻灯片" aria-label="第 2 张，共 3 张" data-slide hidden>
+    <img class="hero-image hero-image-towers" src="{{assetOr .Settings.about_image "images/about-architecture.webp"}}" alt="向天空延伸的玻璃建筑" width="1116" height="482" loading="lazy">
+    <div class="hero-shade"></div><div class="hero-copy"><h2><span>{{.Settings.second_title}}</span><span>{{.Settings.second_title_second}}</span></h2><p>{{.Settings.second_subtitle}}</p><a class="outline-button" href="/#business">探索核心业务{{template "icon-arrow" .}}</a></div>
+  </div>
+  <div class="hero-slide" id="hero-slide-3" role="group" aria-roledescription="幻灯片" aria-label="第 3 张，共 3 张" data-slide hidden>
+    <img class="hero-image" src="{{assetOr .Settings.innovation_image "images/innovation-mountains.webp"}}" alt="晨光中层叠的青蓝色山峦" width="1920" height="919" loading="lazy">
+    <div class="hero-shade"></div><div class="hero-copy"><h2><span>{{.Settings.third_title}}</span><span>{{.Settings.third_title_second}}</span></h2><p>{{.Settings.third_subtitle}}</p><a class="outline-button" href="/#innovation">发现创新力量{{template "icon-arrow" .}}</a></div>
+  </div>
+  <div class="hero-controls" data-hero-controls hidden><span class="hero-count"><b data-current-slide>01</b><span>/ 03</span></span><div class="hero-tabs" aria-label="选择幻灯片"><button type="button" aria-label="切换至第 1 张" aria-controls="hero-slide-1" aria-pressed="true" data-slide-to="0"></button><button type="button" aria-label="切换至第 2 张" aria-controls="hero-slide-2" aria-pressed="false" data-slide-to="1"></button><button type="button" aria-label="切换至第 3 张" aria-controls="hero-slide-3" aria-pressed="false" data-slide-to="2"></button></div><button class="icon-button hero-previous" type="button" aria-label="上一张" data-slide-step="-1">{{template "icon-chevron" .}}</button><button class="icon-button hero-next" type="button" aria-label="下一张" data-slide-step="1">{{template "icon-chevron" .}}</button><span class="sr-only" aria-live="polite" aria-atomic="true" data-slide-status></span></div>
+</section>
+<section class="about-section" id="about" aria-labelledby="about-title">
+  <div class="about-copy"><p class="eyebrow">ABOUT US</p><h2 id="about-title">{{.Settings.about_title}}</h2><p class="about-description"><span>{{.Site.Title}} </span>{{.Settings.about_description}}</p><a class="outline-button dark-button" href="{{.Settings.about_link}}">{{.Settings.about_button}}{{template "icon-arrow" .}}</a></div>
+  <div class="about-watermark" aria-hidden="true"><svg class="brand-mark" viewBox="0 0 290 212" fill="currentColor"><path d="M0 0h48l194 170V0h48v212h-48L50 43v169H0z"/></svg></div><img class="about-image" src="{{assetOr .Settings.about_image "images/about-architecture.webp"}}" width="558" height="241" alt="仰望现代玻璃建筑与穿过楼宇的阳光" loading="lazy">
+</section>
+<section class="strengths-section" aria-labelledby="strengths-title">
+  <div class="section-heading"><div><h2 id="strengths-title">{{.Settings.strengths_title}}</h2><p>{{.Settings.strengths_subtitle}}</p></div><a class="text-link" href="/#business">探索更多{{template "icon-arrow" .}}</a></div>
+  <div class="strengths-grid">
+    <div class="strength">{{template "icon-chip" .}}<h3>{{.Settings.strength_1_title}}</h3><p>{{.Settings.strength_1_text}}</p></div>
+    <div class="strength">{{template "icon-globe" .}}<h3>{{.Settings.strength_2_title}}</h3><p>{{.Settings.strength_2_text}}</p></div>
+    <div class="strength">{{template "icon-diamond" .}}<h3>{{.Settings.strength_3_title}}</h3><p>{{.Settings.strength_3_text}}</p></div>
+    <div class="strength">{{template "icon-people" .}}<h3>{{.Settings.strength_4_title}}</h3><p>{{.Settings.strength_4_text}}</p></div>
+  </div>
+</section>
+<section class="innovation-section" id="innovation" aria-labelledby="innovation-title">
+  <img src="{{assetOr .Settings.innovation_image "images/innovation-banner.webp"}}" alt="" width="1254" height="410" loading="lazy"><div class="innovation-content"><p class="innovation-eyebrow">INNOVATION · FOR A BETTER TOMORROW</p><span class="fine-rule" aria-hidden="true"></span><h2 id="innovation-title">{{.Settings.innovation_title}}</h2><p>{{.Settings.innovation_description}}</p><a class="outline-button" href="/#business">让创新，走向应用{{template "icon-arrow" .}}</a></div>
+</section>
+<section class="business-section section-shell" id="business" aria-labelledby="business-title">
+  <div class="section-heading"><div><p class="eyebrow">OUR BUSINESS</p><h2 id="business-title">{{.Settings.business_title}}</h2></div><p class="section-intro">{{.Settings.business_description}}</p></div>
+  <div class="business-grid"><article><span class="business-number">01</span>{{template "icon-chip" .}}<h3>{{.Settings.business_1_title}}</h3><p>{{.Settings.business_1_text}}</p><a class="text-link" href="{{.Settings.business_1_link}}">了解更多{{template "icon-arrow" .}}</a></article><article><span class="business-number">02</span>{{template "icon-globe" .}}<h3>{{.Settings.business_2_title}}</h3><p>{{.Settings.business_2_text}}</p><a class="text-link" href="{{.Settings.business_2_link}}">了解更多{{template "icon-arrow" .}}</a></article><article><span class="business-number">03</span>{{template "icon-diamond" .}}<h3>{{.Settings.business_3_title}}</h3><p>{{.Settings.business_3_text}}</p><a class="text-link" href="{{.Settings.business_3_link}}">了解更多{{template "icon-arrow" .}}</a></article></div>
+</section>
+<section class="news-section section-shell" id="news" aria-labelledby="news-title"><div class="section-heading"><div><p class="eyebrow">NEWS & INSIGHTS</p><h2 id="news-title">新闻中心</h2></div><a class="text-link" href="/explore/">全部动态{{template "icon-arrow" .}}</a></div>
+  <div class="news-grid">{{range $index, $post := .Posts}}{{if lt $index 3}}{{template "news-card" (dict "Post" $post "Page" $)}}{{end}}{{else}}<div class="empty-news"><span>STAY CONNECTED</span><h3>新的动态，即将发生。</h3><p>关注我们的探索、进展与思考。</p></div>{{end}}</div>
+</section>
+<section class="careers-section section-shell" id="careers" aria-labelledby="careers-title"><div><p class="eyebrow">GROW WITH US</p><h2 id="careers-title">{{.Settings.careers_title}}</h2><p>{{.Settings.careers_description}}</p></div><a class="outline-button dark-button" href="{{.Settings.careers_link}}">{{.Settings.careers_button}}{{template "icon-arrow" .}}</a></section>
+<section class="contact-section section-shell" id="contact" aria-labelledby="contact-title"><div><p class="eyebrow">LET’S BUILD WHAT’S NEXT</p><h2 id="contact-title">{{.Settings.contact_title}}</h2><p>{{.Settings.contact_description}}</p></div>{{if .Settings.contact_action_url}}<a class="outline-button" href="{{.Settings.contact_action_url}}">{{.Settings.contact_action_label}}{{template "icon-arrow" .}}</a>{{else if index .Modules "feedback"}}<a class="outline-button" href="/feedback/">在线留言{{template "icon-arrow" .}}</a>{{else}}<a class="outline-button" href="/account/">进入用户中心{{template "icon-arrow" .}}</a>{{end}}</section>
+{{end}}

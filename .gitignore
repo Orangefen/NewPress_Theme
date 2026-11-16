@@ -1,0 +1,12 @@
+node_modules/
+output/
+*.key
+*.pem
+*.pfx
+*.p12
+.env
+.env.*
+!deployment.env.example
+__pycache__/
+.DS_Store
+.playwright-cli/

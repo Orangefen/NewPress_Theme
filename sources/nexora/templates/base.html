@@ -1,0 +1,31 @@
+{{define "base"}}<!doctype html>
+<html lang="{{.Site.Locale}}" data-theme="nexora" data-contract="{{.Contract}}">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{.PageTitle}}</title><meta name="description" content="{{.Description}}">
+  <meta name="theme-color" content="#26394e">
+  {{if .IsPreview}}<meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer">{{else if .Site.Robots}}<meta name="robots" content="{{.Site.Robots}}">{{end}}
+  {{if and .Canonical (not .IsPreview)}}<link rel="canonical" href="{{.Canonical}}"><meta property="og:url" content="{{.Canonical}}">{{end}}
+  <meta property="og:title" content="{{.PageTitle}}"><meta property="og:description" content="{{.Description}}"><meta property="og:site_name" content="{{.Site.Title}}">
+  {{if .Site.SocialImageURL}}<meta property="og:image" content="{{.Site.SocialImageURL}}">{{end}}
+  <link rel="icon" href="{{.Site.IconURL}}">
+  <link rel="preload" href="{{asset "fonts/nexora-serif.woff2"}}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{asset "css/nexora.css"}}">
+  {{if .ThemeCSSURL}}<link rel="stylesheet" href="{{.ThemeCSSURL}}">{{end}}
+  <script src="{{asset "js/nexora.js"}}" defer></script>
+  {{if and .VerificationEnabled (not .IsPreview) (eq .Kind "single")}}<script src="{{asset "js/nexora-verification.js"}}" defer></script>{{end}}
+  {{range .Integrations.Verification}}<meta name="{{.Name}}" content="{{.Content}}">{{end}}
+  {{if .Integrations.AnalyticsConfig}}<script src="{{.Integrations.ScriptURL}}" data-site-integrations="{{.Integrations.AnalyticsConfig}}" defer></script>{{end}}
+</head>
+<body class="nexora kind-{{.Kind}} {{.ThemeClass}}">
+  <a class="skip-link" href="#main">跳到正文</a>
+  {{template "header" .}}
+  <main id="main">{{template "content" .}}</main>
+  {{template "footer" .}}
+  <dialog class="search-dialog" id="site-search" aria-labelledby="search-title">
+    <div class="search-dialog-inner"><button class="icon-button search-close" type="button" data-search-close aria-label="关闭搜索">{{template "icon-close" .}}</button>
+      <p class="eyebrow">FIND YOUR INSPIRATION</p><h2 id="search-title">探索更多可能</h2>
+      <form action="/explore/" method="get" role="search"><label class="sr-only" for="overlay-query">搜索新闻与文章</label><input id="overlay-query" name="q" type="search" maxlength="200" placeholder="搜索新闻与文章" required><button class="icon-button" type="submit" aria-label="提交搜索">{{template "icon-search" .}}</button></form>
+    </div>
+  </dialog>
+</body></html>{{end}}

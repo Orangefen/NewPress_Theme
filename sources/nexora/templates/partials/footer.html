@@ -1,0 +1,6 @@
+{{define "footer"}}
+<footer class="site-footer">
+  <div class="footer-top"><a class="brand" href="/">{{if .Settings.logo_image}}<img class="custom-logo" src="{{.Settings.logo_image}}" alt="" width="32" height="34">{{else}}{{template "brand-mark" .}}{{end}}<span>{{.Site.Title}}</span></a><p>{{if .Site.Tagline}}{{.Site.Tagline}}{{else}}以科技之名，探索更大的未来。{{end}}</p><a class="back-to-top" href="#main">回到顶部<span aria-hidden="true">↑</span></a></div>
+  <div class="footer-bottom"><span>© {{.Now.Format "2006"}} {{.Site.Title}}</span><nav aria-label="页脚导航">{{with index .Navigation "footer"}}{{if .Configured}}{{range .Items}}<a href="{{.URL}}"{{if .NewWindow}} target="_blank" rel="noopener noreferrer"{{end}}>{{.Label}}</a>{{end}}{{else}}<a href="/#about">关于我们</a><a href="/explore/">新闻中心</a><a href="/account/">用户中心</a>{{end}}{{else}}<a href="/#about">关于我们</a><a href="/explore/">新闻中心</a><a href="/account/">用户中心</a>{{end}}</nav><span class="footer-credit">DESIGNED FOR THE FUTURE</span></div>
+  {{if or .Integrations.ICPNumber .Integrations.PoliceNumber}}<div class="footer-registration">{{if .Integrations.ICPNumber}}<a href="https://beian.miit.gov.cn/" rel="noopener">{{.Integrations.ICPNumber}}</a>{{end}}{{if .Integrations.PoliceNumber}}<a href="{{.Integrations.PoliceURL}}" rel="noopener">{{.Integrations.PoliceNumber}}</a>{{end}}</div>{{end}}
+</footer>{{end}}
