@@ -1,0 +1,83 @@
+{
+  "slug": "docshub",
+  "version": "1.0.0",
+  "status": "published-and-verified",
+  "catalog_sequence": 2,
+  "release_commit": "e71f5a27fe812f4e7159c98a665f20025a353356",
+  "verified_at": "2026-11-17T02:03:33.231Z",
+  "catalog_sha256": "862fdcba1bb6c304a3ca25cca6c4bccf5edadc05a6b05f0bf55088d7a43b58dc",
+  "identical_signed_catalogs": true,
+  "previous_nexora_release_preserved": true,
+  "installed_docshub_fixture_renders": 54,
+  "core_deployed_by_this_release": false,
+  "network_note": "GitHub verification used an independently resolved official IPv4 address in the verification process because local default DNS failed; normal HTTPS hostname/TLS verification and the unchanged NewPress market client verified signatures, covers and packages. No system DNS or application settings were changed. Gitee used the default network configuration.",
+  "sources": [
+    {
+      "dns_override": "",
+      "github_ipv4_override": "185.199.111.133",
+      "installed_docshub_load": "passed",
+      "network": "anonymous HTTPS with standard TLS validation",
+      "sequence": 2,
+      "signature_verified": true,
+      "source": "https://raw.githubusercontent.com/Orangefen/NewPress_Theme/main/catalog.themes-v1.json",
+      "themes": [
+        {
+          "cover_mime": "image/webp",
+          "cover_sha256": "b40c7e3a481ae1442874a62bfc6e8cbb29281a62bf5ede325741ad8951b6de8a",
+          "cover_verified": true,
+          "installed": true,
+          "package_verified": true,
+          "sha256": "b97fa9ee92a36d9821467c6892c89c1067cd82e1fe38cb4c6b7fb1a4efde01a6",
+          "size": 2164501,
+          "slug": "docshub",
+          "version": "1.0.0"
+        },
+        {
+          "cover_mime": "image/webp",
+          "cover_sha256": "c7c09ada7e97f38cab55bab369ce5f1b4bd4b7ff2ca54e91077c07ed9eb378de",
+          "cover_verified": true,
+          "installed": true,
+          "package_verified": true,
+          "sha256": "087c9eab6c6d7bf870e504426be6ddcfeea44229b92be6d9fbf053325ec8a243",
+          "size": 622468,
+          "slug": "nexora",
+          "version": "1.0.1"
+        }
+      ],
+      "verified_at": "2026-11-17T02:02:36.0057637Z"
+    },
+    {
+      "dns_override": "",
+      "installed_docshub_load": "passed",
+      "network": "anonymous HTTPS with standard TLS validation",
+      "sequence": 2,
+      "signature_verified": true,
+      "source": "https://gitee.com/chunyangnet_0/NewPress_Theme/raw/main/catalog.themes-v1.json",
+      "themes": [
+        {
+          "cover_mime": "image/webp",
+          "cover_sha256": "b40c7e3a481ae1442874a62bfc6e8cbb29281a62bf5ede325741ad8951b6de8a",
+          "cover_verified": true,
+          "installed": true,
+          "package_verified": true,
+          "sha256": "b97fa9ee92a36d9821467c6892c89c1067cd82e1fe38cb4c6b7fb1a4efde01a6",
+          "size": 2164501,
+          "slug": "docshub",
+          "version": "1.0.0"
+        },
+        {
+          "cover_mime": "image/webp",
+          "cover_sha256": "c7c09ada7e97f38cab55bab369ce5f1b4bd4b7ff2ca54e91077c07ed9eb378de",
+          "cover_verified": true,
+          "installed": true,
+          "package_verified": true,
+          "sha256": "087c9eab6c6d7bf870e504426be6ddcfeea44229b92be6d9fbf053325ec8a243",
+          "size": 622468,
+          "slug": "nexora",
+          "version": "1.0.1"
+        }
+      ],
+      "verified_at": "2026-11-17T01:49:44.6791174Z"
+    }
+  ]
+}

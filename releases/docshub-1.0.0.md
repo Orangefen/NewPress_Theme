@@ -12,3 +12,5 @@
 本版本收录于 `catalog.themes-v1.json` 序号 2，使用原官方主题公钥签名，以 stable 通道发行。安装包 SHA-256 为 `b97fa9ee92a36d9821467c6892c89c1067cd82e1fe38cb4c6b7fb1a4efde01a6`，大小 2,164,501 字节。
 
 在 NewPress 后台「主题市场」检查目录后安装 DocsHub，再点击「使用此主题」。本次主题发布无需迁移站点数据；进入市场自动刷新由配套 NewPress 核心提供，旧版核心可手动刷新。
+
+GitHub 与 Gitee 的匿名签名目录已逐字节核对一致；两个源均通过 NewPress 真实市场客户端的签名、封面、安装包完整性校验和隔离安装，安装后 54 组模板渲染通过。GitHub 下载验证因本机默认 DNS 不可用而在验证进程内使用独立解析得到的官方 IPv4，保留标准 TLS 与签名校验。详细记录见 [发布验收](docshub-1.0.0.verification.json)。
