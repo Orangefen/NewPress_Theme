@@ -5,7 +5,7 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const tick = () => new Promise(resolve => setImmediate(resolve));
 
-function fixture(provider = 'local', options = {}) {
+function fixture(theme, provider = 'local', options = {}) {
   const requests = [], sdks = [], events = {}, loaded = [], readyCallbacks = [];
   class Element {
     constructor(tag) { this.tagName = tag; this.children = []; this.dataset = {}; this.listeners = {}; this.isConnected = true; this.value = ''; this.clientWidth = 320; }
@@ -23,7 +23,7 @@ function fixture(provider = 'local', options = {}) {
     requestSubmit() { this.submits = (this.submits || 0) + 1; }
   }
   const owner = new Element('form'), head = new Element('head');
-  const document = { head, body: {dataset:{}}, documentElement: {dataset:{theme:'nexora'},lang:'zh-CN'}, createElement: tag => new Element(tag), addEventListener: (name,fn) => { events[name] = fn; } };
+  const document = { head, body: {dataset:{}}, documentElement: {dataset:{theme},lang:'zh-CN'}, createElement: tag => new Element(tag), addEventListener: (name,fn) => { events[name] = fn; } };
   const callbackSDK = name => ({ render(host, params) { sdks.push({name,params}); queueMicrotask(() => params.callback('vendor-token')); return 'widget'; }, remove() {}, reset() {} });
   const window = { addEventListener() {}, matchMedia: () => ({matches:false}), turnstile: callbackSDK('turnstile'), hcaptcha: callbackSDK('hcaptcha'),
     grecaptcha: { ...callbackSDK('recaptcha_v2'), ready: fn => fn(), execute: async (key, params) => { sdks.push({name:'recaptcha_v3',params:{key,...params}}); return 'vendor-token'; } },
@@ -42,25 +42,26 @@ function fixture(provider = 'local', options = {}) {
     if (url.endsWith('/challenge')) return {ok:true,json:async()=>({id:'challenge',image:'data:image/png;base64,test'})};
     return {ok:!options.rejected,json:async()=>options.rejected ? {error:{code:'verification.invalid',message:'验证未通过'}} : options.badReceipt ? {} : {token:'one-use-receipt'}};
   };
-  vm.runInNewContext(fs.readFileSync(options.built ? 'sources/nexora/assets/js/nexora-verification.js' : 'sources/nexora/assets/js/nexora-verification.source.js','utf8'), {window,document,fetch,AbortController,setTimeout,clearTimeout,URLSearchParams,queueMicrotask});
+  vm.runInNewContext(fs.readFileSync(`sources/${theme}/assets/js/${theme}-verification${options.built ? '' : '.source'}.js`,'utf8'), {window,document,fetch,AbortController,setTimeout,clearTimeout,URLSearchParams,queueMicrotask});
   const all = (root = owner) => [root,...root.children.flatMap(child => all(child))];
-  return {owner,window,requests,sdks,loaded,events,all,resolveConfig:()=>configResolve(),resolveSDK:()=>readyCallbacks.splice(0).forEach(ready=>ready()),click:text=>all().find(el=>el.tagName==='button'&&el.textContent===text).listeners.click(), answer:value=>{all().find(el=>el.tagName==='input'&&el.type==='text').value=value;}};
+  return {owner,window,verification:window[theme === 'docshub' ? 'DocsHubVerification' : 'NexoraVerification'],requests,sdks,loaded,events,all,resolveConfig:()=>configResolve(),resolveSDK:()=>readyCallbacks.splice(0).forEach(ready=>ready()),click:text=>all().find(el=>el.tagName==='button'&&el.textContent===text).listeners.click(), answer:value=>{all().find(el=>el.tagName==='input'&&el.type==='text').value=value;}};
 }
 
+for (const theme of ['nexora','docshub']) {
 for (const built of [false,true]) {
-  test(`nexora: verification disabled returns immediately without a challenge (${built ? 'built' : 'source'})`, async () => {
-    const f=fixture('local',{disabled:true,built}); assert.equal(await f.window.NexoraVerification.getToken(f.owner,'comment'),''); assert.equal(f.requests.length,1); assert.equal(f.owner.children.length,0);
+  test(`${theme}: verification disabled returns immediately without a challenge (${built ? 'built' : 'source'})`, async () => {
+    const f=fixture(theme,'local',{disabled:true,built}); assert.equal(await f.verification.getToken(f.owner,'comment'),''); assert.equal(f.requests.length,1); assert.equal(f.owner.children.length,0);
   });
-  test(`nexora: local verification rejects bad receipts and cancels without submitting (${built ? 'built' : 'source'})`, async () => {
-    const f=fixture('local',{badReceipt:true,built}); const result=f.window.NexoraVerification.getToken(f.owner,'comment'); await tick(); f.answer('12345'); f.click('确认验证'); await tick();
+  test(`${theme}: local verification rejects bad receipts and cancels without submitting (${built ? 'built' : 'source'})`, async () => {
+    const f=fixture(theme,'local',{badReceipt:true,built}); const result=f.verification.getToken(f.owner,'comment'); await tick(); f.answer('12345'); f.click('确认验证'); await tick();
     assert.match(f.all().find(el=>el.className==='verification-status').textContent,/回执无效/);
     const rejected=assert.rejects(result,{code:'verification.cancelled'});f.click('取消');await rejected;assert.equal(f.owner.children.length,0);
   });
 }
 
 for (const provider of ['turnstile','hcaptcha','recaptcha_v2','recaptcha_v3','geetest','tencent']) {
-  test(`nexora: ${provider} exchanges SDK proof before returning the application receipt`, async () => {
-    const f=fixture(provider);const result=f.window.NexoraVerification.getToken(f.owner,'comment');await tick();
+  test(`${theme}: ${provider} exchanges SDK proof before returning the application receipt`, async () => {
+    const f=fixture(theme,provider);const result=f.verification.getToken(f.owner,'comment');await tick();
     if(provider==='geetest')f.click('点击开始极验验证');if(provider==='tencent')f.click('点击开始腾讯验证');
     assert.equal(await result,'one-use-receipt');const request=f.requests.find(x=>x.url.endsWith('/verify'));assert.equal(request.body.scene,'comment');
     if(provider==='geetest')assert.deepEqual(request.body.proof,{lot_number:'lot',captcha_output:'output',pass_token:'pass',gen_time:'123'});
@@ -71,21 +72,23 @@ for (const provider of ['turnstile','hcaptcha','recaptcha_v2','recaptcha_v3','ge
   });
 }
 
-test('nexora: cancelled configuration load cannot resurrect a widget', async () => {
-  const f=fixture('local',{waitConfig:true});const result=f.window.NexoraVerification.getToken(f.owner,'register');await tick();const rejected=assert.rejects(result,{code:'verification.cancelled'});f.window.NexoraVerification.cancel(f.owner);await rejected;f.resolveConfig();await tick();assert.equal(f.requests.length,1);assert.equal(f.owner.children.length,0);
+test(`${theme}: cancelled configuration load cannot resurrect a widget`, async () => {
+  const f=fixture(theme,'local',{waitConfig:true});const result=f.verification.getToken(f.owner,'register');await tick();const rejected=assert.rejects(result,{code:'verification.cancelled'});f.verification.cancel(f.owner);await rejected;f.resolveConfig();await tick();assert.equal(f.requests.length,1);assert.equal(f.owner.children.length,0);
 });
 
-test('nexora: repeated native submit while verification is loading submits only once', async () => {
-  const f=fixture('local',{disabled:true,waitConfig:true,native:true});const event={target:f.owner,preventDefault(){},stopImmediatePropagation(){}};
+test(`${theme}: repeated native submit while verification is loading submits only once`, async () => {
+  const f=fixture(theme,'local',{disabled:true,waitConfig:true,native:true});const event={target:f.owner,preventDefault(){},stopImmediatePropagation(){}};
   const first=f.events.submit(event);const second=f.events.submit(event);await tick();assert.equal(f.requests.length,1);f.resolveConfig();await Promise.all([first,second]);assert.equal(f.owner.submits,1);
 });
 
 for (const provider of ['hcaptcha','turnstile']) {
   for (const built of [false,true]) {
-    test(`nexora: ${provider} waits for SDK readiness after the script load event (${built ? 'built' : 'source'})`, async () => {
-      const f=fixture(provider,{waitSDK:true,built});const result=f.window.NexoraVerification.getToken(f.owner,'comment');await tick();
+    test(`${theme}: ${provider} waits for SDK readiness after the script load event (${built ? 'built' : 'source'})`, async () => {
+      const f=fixture(theme,provider,{waitSDK:true,built});const result=f.verification.getToken(f.owner,'comment');await tick();
       assert.equal(f.loaded.length,1);assert.equal(f.sdks.length,0);assert.equal(f.requests.filter(x=>x.url.endsWith('/verify')).length,0);
       f.resolveSDK();assert.equal(await result,'one-use-receipt');assert.equal(f.sdks.length,1);
     });
   }
+}
+
 }

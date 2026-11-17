@@ -1,0 +1,12 @@
+{
+  "slug": "docshub",
+  "version": "1.0.0",
+  "path": "packages/themes/docshub-1.0.0.zip",
+  "size": 2164501,
+  "sha256": "b97fa9ee92a36d9821467c6892c89c1067cd82e1fe38cb4c6b7fb1a4efde01a6",
+  "status": "signed",
+  "notes": "releases/docshub-1.0.0.md",
+  "catalog": "catalog.themes-v1.json",
+  "catalog_sequence": 2,
+  "published_at": "2026-11-17T00:46:32.648Z"
+}

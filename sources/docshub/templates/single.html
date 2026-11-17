@@ -1,0 +1,13 @@
+{{define "content"}}<div class="reading-layout page-content">
+  <article class="document-article"><nav class="breadcrumbs" aria-label="当前位置"><a href="/">首页</a>{{template "icon" "chevron"}}<a href="/explore/">文档</a>{{if .Post.Category}}{{template "icon" "chevron"}}<span>{{.Post.Category}}</span>{{end}}</nav>
+    {{if .IsPreview}}<p class="preview-notice">草稿预览 · 此内容尚未公开发布。{{if .Preview.EditorURL}}<a href="{{.Preview.EditorURL}}">返回编辑器</a>{{end}}</p>{{end}}
+    <header class="article-header"><span class="category-badge">{{if .Post.Category}}{{.Post.Category}}{{else}}文档{{end}}</span><h1>{{.Post.Title}}</h1>{{if .Post.Excerpt}}<p class="article-lead">{{.Post.Excerpt}}</p>{{end}}<div class="article-meta">{{if .Post.AuthorURL}}<a href="{{.Post.AuthorURL}}">{{.Post.AuthorName}}</a>{{else if .Post.AuthorName}}<span>{{.Post.AuthorName}}</span>{{end}}<span>{{template "icon" "clock"}}<time datetime="{{date .Post.UpdatedAt}}">{{date .Post.UpdatedAt}}</time></span><span data-reading-time></span><button type="button" data-copy-link>{{template "icon" "copy"}}复制链接</button></div></header>
+    <details class="mobile-toc" data-mobile-toc hidden><summary>本页目录 {{template "icon" "down"}}</summary><ol data-mobile-toc-list></ol></details>
+    <div class="prose" data-article-body>{{safeHTML .Post.ContentHTML}}</div>
+    {{if .Post.Tags}}<nav class="article-tags" aria-label="文章标签">{{range .Post.Tags}}<a href="{{.URL}}"># {{.Name}}</a>{{end}}</nav>{{end}}
+    {{range .ReadingSeries}}<section class="series-reading"><a href="{{.Series.URL}}">{{template "icon" "book"}}{{.Series.Title}} · 第 {{.Position}} 篇</a><nav aria-label="系列上下篇">{{if gt .Previous.ID 0}}<a href="{{.Previous.URL}}"><small>上一篇</small><strong>{{.Previous.Title}}</strong></a>{{end}}{{if gt .Next.ID 0}}<a href="{{.Next.URL}}"><small>下一篇</small><strong>{{.Next.Title}}</strong>{{template "icon" "arrow"}}</a>{{end}}</nav></section>{{end}}
+    {{range .PluginFragments}}<aside class="plugin-fragment">{{.Text}}</aside>{{end}}
+    {{if and (eq .Kind "single") (not .IsPreview)}}{{template "comments" .}}{{end}}
+  </article>
+  <aside class="article-aside"><nav class="table-of-contents" aria-label="本页目录" data-toc hidden><p>本页目录</p><ol data-toc-list></ol></nav><a class="reading-help" href="{{index .Settings "community_link"}}">{{template "icon" "chat"}}遇到问题？到社区聊聊 {{template "icon" "arrow"}}</a><a class="back-top" href="#main">返回顶部 ↑</a></aside>
+</div>{{end}}

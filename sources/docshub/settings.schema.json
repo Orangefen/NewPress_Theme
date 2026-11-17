@@ -1,0 +1,239 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "accent": {
+      "type": "string",
+      "title": "强调色",
+      "default": "#4c82ff",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "visual",
+        "control": "color",
+        "order": 0,
+        "css_variable": "--accent"
+      },
+      "pattern": "^#[0-9a-fA-F]{6}$"
+    },
+    "hero_title": {
+      "type": "string",
+      "title": "首屏标题 · 第一行",
+      "default": "从这里，",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "hero",
+        "control": "text",
+        "order": 10
+      }
+    },
+    "hero_title_second": {
+      "type": "string",
+      "title": "首屏标题 · 第二行",
+      "default": "开启你的开发之旅",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "hero",
+        "control": "text",
+        "order": 20
+      }
+    },
+    "hero_description": {
+      "type": "string",
+      "title": "首屏介绍 · 第一行",
+      "default": "全面、清晰、易上手的开发者文档与教程，",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "hero",
+        "control": "text",
+        "order": 30
+      }
+    },
+    "hero_description_second": {
+      "type": "string",
+      "title": "首屏介绍 · 第二行",
+      "default": "助你快速掌握核心技能，构建更好的产品。",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "hero",
+        "control": "text",
+        "order": 40
+      }
+    },
+    "tutorials_title": {
+      "type": "string",
+      "title": "教程区标题",
+      "default": "热门教程",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "hero",
+        "control": "text",
+        "order": 50
+      }
+    },
+    "community_title": {
+      "type": "string",
+      "title": "社区卡片标题",
+      "default": "加入开发者社区",
+      "maxLength": 160,
+      "x-newpress": {
+        "group": "hero",
+        "control": "text",
+        "order": 60
+      }
+    },
+    "start_link": {
+      "type": "string",
+      "title": "快速开始链接",
+      "default": "/explore/?q=入门",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "links",
+        "control": "text",
+        "order": 70
+      },
+      "format": "uri-reference"
+    },
+    "advanced_link": {
+      "type": "string",
+      "title": "进阶教程链接",
+      "default": "/explore/?q=进阶",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "links",
+        "control": "text",
+        "order": 80
+      },
+      "format": "uri-reference"
+    },
+    "api_link": {
+      "type": "string",
+      "title": "API 参考链接",
+      "default": "/explore/?q=API",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "links",
+        "control": "text",
+        "order": 90
+      },
+      "format": "uri-reference"
+    },
+    "practice_link": {
+      "type": "string",
+      "title": "最佳实践链接",
+      "default": "/explore/?q=实战",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "links",
+        "control": "text",
+        "order": 100
+      },
+      "format": "uri-reference"
+    },
+    "tools_link": {
+      "type": "string",
+      "title": "开发工具链接",
+      "default": "/explore/?q=工具",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "links",
+        "control": "text",
+        "order": 110
+      },
+      "format": "uri-reference"
+    },
+    "faq_link": {
+      "type": "string",
+      "title": "常见问题链接",
+      "default": "/explore/?q=常见问题",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "links",
+        "control": "text",
+        "order": 120
+      },
+      "format": "uri-reference"
+    },
+    "changelog_link": {
+      "type": "string",
+      "title": "更新日志链接",
+      "default": "/explore/?q=更新",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "links",
+        "control": "text",
+        "order": 130
+      },
+      "format": "uri-reference"
+    },
+    "community_link": {
+      "type": "string",
+      "title": "社区入口链接",
+      "default": "/account/",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "links",
+        "control": "text",
+        "order": 140
+      },
+      "format": "uri-reference"
+    },
+    "projects_link": {
+      "type": "string",
+      "title": "开源项目链接",
+      "default": "/explore/?q=开源",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "links",
+        "control": "text",
+        "order": 150
+      },
+      "format": "uri-reference"
+    },
+    "about_link": {
+      "type": "string",
+      "title": "关于我们链接",
+      "default": "/explore/?q=关于",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "links",
+        "control": "text",
+        "order": 160
+      },
+      "format": "uri-reference"
+    },
+    "demo_link": {
+      "type": "string",
+      "title": "演示教程链接",
+      "default": "/#tutorials",
+      "maxLength": 2048,
+      "x-newpress": {
+        "group": "links",
+        "control": "text",
+        "order": 170
+      },
+      "format": "uri-reference"
+    }
+  },
+  "x-newpress": {
+    "groups": [
+      {
+        "id": "visual",
+        "title": "视觉外观",
+        "icon": "palette",
+        "order": 0
+      },
+      {
+        "id": "hero",
+        "title": "首页内容",
+        "icon": "layout",
+        "order": 10
+      },
+      {
+        "id": "links",
+        "title": "导航与学习入口",
+        "icon": "link",
+        "order": 20
+      }
+    ]
+  }
+}

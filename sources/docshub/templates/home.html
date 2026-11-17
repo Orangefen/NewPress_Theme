@@ -1,0 +1,19 @@
+{{define "content"}}
+<section class="hero" aria-labelledby="hero-title">
+  <img class="hero-art" src="{{asset "images/glass-ribbon.webp"}}" alt="" width="1036" height="481" fetchpriority="high">
+  <div class="hero-copy"><h1 id="hero-title"><span>{{index .Settings "hero_title"}}</span><span>{{index .Settings "hero_title_second"}}</span></h1><p>{{index .Settings "hero_description"}}<br>{{index .Settings "hero_description_second"}}</p><div class="hero-actions"><a class="button button-primary" href="{{index .Settings "start_link"}}">开始阅读 {{template "icon" "arrow"}}</a><a class="button button-secondary" href="{{index .Settings "demo_link"}}">{{template "icon" "play"}}观看演示</a></div></div>
+</section>
+<nav class="quick-links" aria-label="学习入口">
+  <a href="{{index .Settings "start_link"}}"><span class="quick-icon">{{template "icon" "rocket"}}</span><span><strong>快速上手</strong><small>5 分钟掌握核心</small></span>{{template "icon" "chevron"}}</a>
+  <a href="{{index .Settings "advanced_link"}}"><span class="quick-icon">{{template "icon" "book"}}</span><span><strong>进阶教程</strong><small>深入学习进阶技巧</small></span>{{template "icon" "chevron"}}</a>
+  <a href="{{index .Settings "api_link"}}"><span class="quick-icon">{{template "icon" "code"}}</span><span><strong>API 参考</strong><small>完整接口文档</small></span>{{template "icon" "chevron"}}</a>
+  <a href="{{index .Settings "tools_link"}}"><span class="quick-icon">{{template "icon" "box"}}</span><span><strong>开发工具</strong><small>提升开发效率</small></span>{{template "icon" "chevron"}}</a>
+</nav>
+<div class="home-content">
+  <section class="tutorials" id="tutorials" aria-labelledby="tutorials-title"><div class="section-heading"><h2 id="tutorials-title">{{index .Settings "tutorials_title"}}</h2><a href="/explore/">查看全部 {{template "icon" "arrow"}}</a></div>
+    <div class="tutorial-grid">{{$posts := .Posts}}{{if .Featured}}{{$posts = .Featured}}{{end}}{{range $i, $post := $posts}}{{if lt $i 4}}{{template "tutorial-card" (dict "Post" $post "Index" $i "Images" $.Images)}}{{end}}{{else}}<div class="empty-state"><span class="empty-icon">{{template "icon" "book"}}</span><h3>每一次成长，从一篇好教程开始</h3><p>教程发布后会显示在这里。</p><a href="/explore/" class="text-link">浏览文档 {{template "icon" "arrow"}}</a></div>{{end}}</div>
+  </section>
+  <div class="home-bottom"><section class="latest" aria-labelledby="latest-title"><div class="section-heading"><h2 id="latest-title">最新文档</h2><a href="/explore/?sort=published">查看全部 {{template "icon" "arrow"}}</a></div><div class="document-list">{{range $i, $post := .Posts}}{{if lt $i 4}}<a class="document-row row-{{$i}}" href="{{$post.URL}}"><span class="document-icon">{{if eq $i 0}}{{template "icon" "file"}}{{else if eq $i 1}}{{template "icon" "code"}}{{else if eq $i 2}}{{template "icon" "box"}}{{else}}{{template "icon" "bolt"}}{{end}}</span><div><h3>{{$post.Title}}</h3><p>{{$post.Excerpt}}</p></div><time datetime="{{$post.PublishedAt.Format "2006-01-02T15:04:05Z07:00"}}" data-relative-time>{{date $post.PublishedAt}}</time><span class="document-dot" aria-hidden="true"></span></a>{{end}}{{else}}<div class="empty-state compact"><p>新的知识正在路上。</p></div>{{end}}</div></section>
+    <aside class="home-aside" aria-label="社区与学习路径"><section class="community-card"><img src="{{asset "images/community-mountains.webp"}}" alt="" width="283" height="140" loading="lazy">{{template "icon" "users"}}<div><h2>{{index .Settings "community_title"}}</h2><p>与优秀的开发者一起成长</p><a href="{{index .Settings "community_link"}}">立即加入 {{template "icon" "arrow"}}</a></div></section><section class="learning-path"><h2>学习路径</h2><ol><li><a href="{{index .Settings "start_link"}}"><strong>快速入门</strong><span>了解基本概念与环境搭建</span></a></li><li><a href="{{index .Settings "advanced_link"}}"><strong>进阶提升</strong><span>掌握核心功能与最佳实践</span></a></li><li><a href="{{index .Settings "practice_link"}}"><strong>实战应用</strong><span>完成真实项目开发</span></a></li></ol></section></aside>
+  </div>
+</div>{{end}}
