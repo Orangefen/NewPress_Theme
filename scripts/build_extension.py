@@ -46,6 +46,22 @@ def build(source: Path, output: Path, kind: str):
     manifest = json.loads(manifest_path.read_text("utf-8"), object_pairs_hook=unique_object)
     if manifest.get("schema") != 1 or not manifest.get("version"):
         raise ValueError("a versioned schema-1 manifest is required")
+    license_path = source / "LICENSE"
+    if license_path.is_symlink() or not license_path.is_file():
+        raise ValueError("source must include a regular LICENSE file with the full license text")
+    if license_path.stat().st_size > 1 << 20:
+        raise ValueError("LICENSE exceeds 1 MiB")
+    license_text = license_path.read_text("utf-8").strip()
+    if not license_text:
+        raise ValueError("LICENSE must contain the full license text")
+    if manifest.get("license") == "Apache-2.0":
+        # Keep the complete terms; allow rewrapping and a different copyright
+        # holder in the optional application appendix.
+        expected = (Path(__file__).resolve().parents[1] / "LICENSE").read_text("utf-8")
+        marker = "END OF TERMS AND CONDITIONS"
+        terms = lambda value: " ".join(value.split(marker)[0].split())
+        if marker not in license_text or terms(license_text) != terms(expected):
+            raise ValueError("Apache-2.0 packages must include the full license terms")
     files, total = [], 0
     for directory, names, filenames in os.walk(source, followlinks=False):
         current = Path(directory)

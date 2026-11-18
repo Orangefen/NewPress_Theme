@@ -2,10 +2,14 @@
 
 使用已加入主题市场支持的 NewPress 核心。GitHub 主仓库为 `Orangefen/NewPress_Theme`，Gitee 镜像为 `chunyangnet_0/NewPress_Theme`，统一使用 `main` 分支。签名私钥必须位于仓库之外；目录仅接受公网 GitHub raw / Gitee raw 地址，两个镜像必须同步相同的目录、ZIP 与封面。
 
-当前目录 `catalog.themes-v1.json` 使用 schema 2、序号 2，包含 Nexora 1.0.1 和 DocsHub 1.0.0，有效期至 2027-11-17T00:00:00Z。完整发行元数据保存在 `releases/catalog.themes-v1.sequence-2.metadata.json`，序号 1 的元数据继续保留。后续发布需要更高的序号，保留既有 ZIP 字节与历史发行时间。
+当前目录 `catalog.themes-v1.json` 使用 schema 2、序号 3，包含 Nexora 1.0.1、DocsHub 1.0.0 和 DocsHub 1.2.0，有效期至 2027-11-18T00:00:00Z。完整发行元数据保存在 `releases/catalog.themes-v1.sequence-3.metadata.json`，序号 1 和 2 的元数据继续保留。后续发布需要更高的序号，保留既有 ZIP 字节与历史发行时间。
+
+发布前核对主题根目录的 `LICENSE`、`THIRD_PARTY_NOTICES.md`、`ASSETS.md` 和随字体携带的 `assets/fonts/OFL.txt`，打包后再次确认这些文件实际进入 ZIP。代码保持 Apache-2.0，第三方字体继续遵守其独立许可。项目配图为 AI 生成素材，不另列来源署名；更新图片时同步更新预览封面和素材清单。
+
+补许可文件同样会改变 ZIP 的摘要和长度，应作为新版本打包并递增目录序号、重新签名；不能原地修补已有签名包。历史版本的许可归属和已获得的授权不因新增说明而改变。
 
 1. 修改 `sources/<slug>/theme.json` 的版本。封面字段示例：`"cover": "assets/images/preview.webp"`。仅支持 PNG、JPEG、WebP，最大 2 MiB、4096×4096，最多 1200 万像素；建议 1600×1000 或 960×600。
-2. 构建、测试、打包。先运行 `npm run build`、`npm run check`、`npm test`，再对改动主题运行 `python scripts/check_core.py --core ../newpress --theme <slug>`。Nexora 1.0.1 和 DocsHub 1.0.0 安装包已经存在；新版本使用 `python scripts/build_extension.py --kind theme --source sources/<slug> --output packages/themes/<slug>-<新版本>.zip`，不要覆盖已有文件。
+2. 构建、测试、打包。先运行 `npm run build`、`npm run check`、`npm test`，再对改动主题运行 `python scripts/check_core.py --core ../newpress --theme <slug>`。Nexora 1.0.1、DocsHub 1.0.0 和 DocsHub 1.2.0 安装包已经存在；新版本使用 `python scripts/build_extension.py --kind theme --source sources/<slug> --output packages/themes/<slug>-<新版本>.zip`，不要覆盖已有文件。
 3. 在核心仓库运行发布工具（以下 `<...>` 需替换为实际值；先将源码、包和发行说明路径转换为绝对路径）：
 
 ```text

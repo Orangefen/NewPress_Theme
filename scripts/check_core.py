@@ -25,6 +25,10 @@ else:
     subprocess.run(['go', 'run', './cmd/themecheck', '--source', str(root / 'sources' / slug)], cwd=core, check=True, env=environment)
 with tempfile.TemporaryDirectory(prefix='newpress-theme-tests-') as temporary:
     overlay = Path(temporary) / 'overlay.json'
-    overlay.write_text(json.dumps({'Replace': {str(core / f'internal/httpserver/{slug}_external_test.go'): str(root / f'tests/integration/{slug}_theme_test.go')}}), encoding='utf-8')
-    pattern = '^Test' + label + ('InteractiveUI$' if args.ui else 'PublicTheme$')
+    replacements = {
+        str(core / 'internal/httpserver' / ('external_' + test.name)): str(test)
+        for test in (root / 'tests/integration').glob(slug + '_*_test.go')
+    }
+    overlay.write_text(json.dumps({'Replace': replacements}), encoding='utf-8')
+    pattern = '^Test' + label + ('InteractiveUI$' if args.ui else '')
     subprocess.run(['go', 'test', '-overlay', str(overlay), './internal/httpserver', '-run', pattern, '-count=1', '-timeout=60m' if args.ui else '-timeout=5m', '-v'], cwd=core, check=True, env=environment)

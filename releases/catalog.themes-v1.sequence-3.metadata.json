@@ -1,0 +1,26 @@
+{
+  "theme/nexora@1.0.1": {
+    "notes": "Nexora 1.0.1：独立主题仓库发行。\n\n新增主题市场封面与发行元数据。主题源码、测试和打包流程从主程序分离，使用 public/v1 契约；原有 52 项主题设置兼容并保留。",
+    "release": {
+      "channel": "stable",
+      "published_at": "2026-11-16T11:58:01.7628278Z",
+      "data_compatible": true
+    }
+  },
+  "theme/docshub@1.0.0": {
+    "notes": "DocsHub 1.0.0：历史稳定版本，保留用于兼容已安装站点。",
+    "release": {
+      "channel": "stable",
+      "published_at": "2026-11-17T00:46:32.648Z",
+      "data_compatible": true
+    }
+  },
+  "theme/docshub@1.2.0": {
+    "notes": "DocsHub 1.2.0：全面扩充主题设置与页面模块，完善首页、文档列表、文章阅读、系列、评论提示、404 和页脚的配置能力；优化导航选中态、响应式布局与无脚本快捷入口。\n\n新增 15 组、121 项设置，支持预览、导入导出、恢复默认值和旧设置兼容。主题包继续使用 public/v1，现有内容与站点数据无需迁移。",
+    "release": {
+      "channel": "stable",
+      "published_at": "2026-11-18T00:25:00Z",
+      "data_compatible": true
+    }
+  }
+}

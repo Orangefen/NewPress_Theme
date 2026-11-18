@@ -1,30 +1,32 @@
 {{define "base"}}<!doctype html>
-<html lang="{{.Site.Locale}}" data-theme="docshub" data-contract="{{.Contract}}">
+<html lang="{{.Site.Locale}}" data-theme="docshub" data-contract="{{.Contract}}" data-mode="{{if eq (index .Settings "default_color_mode") "dark"}}dark{{else}}light{{end}}" data-default-mode="{{with index .Settings "default_color_mode"}}{{.}}{{else}}light{{end}}" data-allow-color-switch="{{ne (index .Settings "allow_color_switch") false}}" data-appearance-preview="{{.IsPreview}}" data-reduce-motion="{{eq (index .Settings "reduce_motion") true}}" data-sticky-header="{{ne (index .Settings "sticky_header") false}}">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>{{.PageTitle}}</title><meta name="description" content="{{.Description}}"><meta name="theme-color" content="#f5f6fc">
+  <title>{{.PageTitle}}</title><meta name="description" content="{{.Description}}"><meta name="theme-color" content="{{if eq (index .Settings "default_color_mode") "dark"}}#111523{{else}}#f5f6fc{{end}}">
   {{if .IsPreview}}<meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer">{{else if .Site.Robots}}<meta name="robots" content="{{.Site.Robots}}">{{end}}
   {{if and .Canonical (not .IsPreview)}}<link rel="canonical" href="{{.Canonical}}"><meta property="og:url" content="{{.Canonical}}">{{end}}
   <meta property="og:title" content="{{.PageTitle}}"><meta property="og:description" content="{{.Description}}"><meta property="og:site_name" content="{{.Site.Title}}">
   {{if .Site.SocialImageURL}}<meta property="og:image" content="{{.Site.SocialImageURL}}">{{end}}
   <link rel="icon" href="{{.Site.IconURL}}">
   <script src="{{asset "js/docshub-mode.js"}}"></script>
-  <link rel="preload" href="{{asset "fonts/docshub-sans.woff2"}}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{asset "css/docshub.css"}}">
   {{if .ThemeCSSURL}}<link rel="stylesheet" href="{{.ThemeCSSURL}}">{{end}}
+  {{if .NavigationCSSURL}}<link rel="stylesheet" href="{{.NavigationCSSURL}}">{{end}}
   <script src="{{asset "js/docshub.js"}}" defer></script>
   {{if and .VerificationEnabled (not .IsPreview) (eq .Kind "single")}}<script src="{{asset "js/docshub-verification.js"}}" defer></script>{{end}}
   {{range .Integrations.Verification}}<meta name="{{.Name}}" content="{{.Content}}">{{end}}
   {{if .Integrations.AnalyticsConfig}}<script src="{{.Integrations.ScriptURL}}" data-site-integrations="{{.Integrations.AnalyticsConfig}}" defer></script>{{end}}
 </head>
-<body class="docshub kind-{{.Kind}} {{.ThemeClass}}">
+<body class="docshub kind-{{.Kind}} {{.ThemeClass}}" data-page-kind="{{.Kind}}">
   <a class="skip-link" href="#main">跳到正文</a>
   {{template "sidebar" .}}
   <div class="site-shell">
-    <noscript><nav class="nojs-nav" aria-label="快捷导航"><a href="/">首页</a><a href="/explore/">文档与教程</a><a href="/account/">账号</a></nav></noscript>
+    <noscript><nav class="nojs-nav" aria-label="快捷导航"><a href="/">首页</a><a href="/explore/">文档与教程</a>{{if ne (index .Settings "show_account") false}}<a href="/account/">账号</a>{{end}}</nav></noscript>
+    {{with index .Settings "announcement_text"}}<aside class="site-announcement" aria-label="站点公告"><p>{{.}}</p>{{if index $.Settings "announcement_link"}}<a href="{{index $.Settings "announcement_link"}}">{{with index $.Settings "announcement_link_label"}}{{.}}{{else}}查看详情{{end}} {{template "icon" "arrow"}}</a>{{end}}</aside>{{end}}
     {{template "topbar" .}}
-    <main id="main">{{template "content" .}}</main>
+    <main id="main" tabindex="-1">{{template "content" .}}</main>
     {{template "footer" .}}
+    {{if index .Settings "show_back_to_top"}}<a class="back-to-top" href="#main" data-back-to-top aria-label="返回顶部" title="返回顶部" hidden>{{template "icon" "arrow"}}</a>{{end}}
   </div>
   <button class="sidebar-scrim" data-menu-close type="button" aria-label="关闭导航" hidden></button>
   <div class="toast" data-toast role="status" aria-live="polite" hidden></div>

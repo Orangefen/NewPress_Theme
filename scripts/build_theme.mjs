@@ -2,7 +2,7 @@
 // or resource list is required. Runtime packages do not need Node.
 import { readdir, readFile, writeFile, realpath } from 'node:fs/promises';
 import { resolve, relative, sep } from 'node:path';
-import { transform } from 'esbuild';
+import { build, transform } from 'esbuild';
 
 const args = process.argv.slice(2);
 const index = args.indexOf('--source');
@@ -20,9 +20,14 @@ async function walk(directory) {
     const output = file.replace(/\.source\.(css|js)$/, '.$1');
     if (relative(root, output).split(sep).includes('..')) throw new Error('Output escapes theme root');
     const loader = file.endsWith('.css') ? 'css' : 'js';
-    const compiled = '/* Generated: npm run build:theme */\n' + (await transform(await readFile(file, 'utf8'), {
-      loader, minify: true, target: ['chrome100', 'firefox110', 'safari16'], legalComments: 'none', charset: 'utf8',
-    })).code;
+    const source = await readFile(file, 'utf8');
+    const options = { minify: true, target: ['chrome100', 'firefox110', 'safari16'], legalComments: 'none', charset: 'utf8' };
+    // Compose local source modules into standalone browser entries.
+    const modular = /^\s*(?:import\s|@import\b)/m.test(source);
+    const code = modular
+      ? (await build({ ...options, entryPoints: [file], bundle: true, write: false, ...(loader === 'js' ? { format: 'iife' } : { external: ['*.woff2', '*.woff', '*.webp', '*.png', '*.svg'] }) })).outputFiles[0].text
+      : (await transform(source, { ...options, loader })).code;
+    const compiled = '/* Generated: npm run build:theme */\n' + code;
     if (check) {
       if (await readFile(output, 'utf8').catch(() => '') !== compiled) throw new Error(`${output} is stale`);
     } else await writeFile(output, compiled);

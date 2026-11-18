@@ -1,12 +1,13 @@
 {
   "name": "newpress-themes",
+  "license": "Apache-2.0",
   "private": true,
   "scripts": {
     "build": "node scripts/build_theme.mjs --source sources/nexora && node scripts/build_theme.mjs --source sources/docshub",
     "check": "node scripts/build_theme.mjs --source sources/nexora --check && node scripts/build_theme.mjs --source sources/docshub --check",
     "test": "node --test tests/frontend/*.test.cjs",
     "package": "python scripts/build_extension.py --kind theme --source sources/nexora --output packages/themes/nexora-1.0.1.zip",
-    "package:docshub": "python scripts/build_extension.py --kind theme --source sources/docshub --output packages/themes/docshub-1.0.0.zip"
+    "package:docshub": "python scripts/build_extension.py --kind theme --source sources/docshub --output packages/themes/docshub-1.2.0.zip"
   },
   "devDependencies": { "esbuild": "0.28.2" }
 }

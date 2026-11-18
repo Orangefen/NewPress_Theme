@@ -1,0 +1,6 @@
+{{define "nav-item"}}
+<div class="nav-item">
+  <a data-nav-link href="{{.URL}}"{{if .Active}} aria-current="page"{{end}}{{if .NewWindow}} target="_blank" rel="noopener noreferrer"{{else if .Rel}} rel="{{.Rel}}"{{end}}>{{template "icon" .Icon}}<span>{{.Label}}</span>{{if .Badge.Text}}<small class="nav-badge">{{.Badge.Text}}</small>{{end}}{{if .NewWindow}}<span class="sr-only">（在新标签页打开）</span>{{end}}</a>
+  {{if .Children}}<details class="nav-branch" open><summary><span>{{.Label}}的子目录</span>{{template "icon" "down"}}</summary><div class="nav-children">{{range .Children}}{{template "nav-item" .}}{{end}}</div></details>{{end}}
+</div>
+{{end}}
