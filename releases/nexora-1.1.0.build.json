@@ -1,0 +1,13 @@
+{
+  "slug": "nexora",
+  "version": "1.1.0",
+  "path": "packages/themes/nexora-1.1.0.zip",
+  "size": 686233,
+  "sha256": "5dbb43bd9d49dbe6570edea3aa9b87db9c777255225e12bf6aba7142e5bf8dbd",
+  "status": "published",
+  "notes": "releases/nexora-1.1.0.md",
+  "catalog": "catalog.themes-v1.json",
+  "catalog_sequence": 4,
+  "published_at": "2026-11-18T00:45:34Z",
+  "verification": "pending remote mirror verification"
+}

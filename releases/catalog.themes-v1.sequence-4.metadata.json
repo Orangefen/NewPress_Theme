@@ -1,0 +1,34 @@
+{
+  "theme/nexora@1.0.1": {
+    "notes": "Nexora 1.0.1：历史稳定版本，保留用于兼容已安装站点。",
+    "release": {
+      "channel": "stable",
+      "published_at": "2026-11-16T11:58:01.7628278Z",
+      "data_compatible": true
+    }
+  },
+  "theme/nexora@1.1.0": {
+    "notes": "Nexora 1.1.0：全面扩充企业官网主题设置与模块化首页。新增 21 组、186 项设置，覆盖外观、布局、首页模块、企业事实、合作伙伴、常见问题、新闻、联系资料、导航和文章阅读。\n\n完善首页区块联动、新闻筛选与分页、专题系列、阅读目录、轮播暂停、移动菜单、评论回复、验证适配器及无脚本降级；保留旧设置兼容和核心 public/v1 数据边界。",
+    "release": {
+      "channel": "stable",
+      "published_at": "2026-11-18T00:45:34Z",
+      "data_compatible": true
+    }
+  },
+  "theme/docshub@1.0.0": {
+    "notes": "DocsHub 1.0.0：历史稳定版本，保留用于兼容已安装站点。",
+    "release": {
+      "channel": "stable",
+      "published_at": "2026-11-17T00:46:32.648Z",
+      "data_compatible": true
+    }
+  },
+  "theme/docshub@1.2.0": {
+    "notes": "DocsHub 1.2.0：全面扩充主题设置与页面模块，完善首页、文档列表、文章阅读、系列、评论提示、404 和页脚的配置能力。",
+    "release": {
+      "channel": "stable",
+      "published_at": "2026-11-18T00:25:00Z",
+      "data_compatible": true
+    }
+  }
+}

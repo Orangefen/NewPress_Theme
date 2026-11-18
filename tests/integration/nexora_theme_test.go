@@ -26,7 +26,9 @@ func nexoraFixtureTheme(t *testing.T) *theme.Manager {
 	t.Helper()
 	root := t.TempDir()
 	source := os.Getenv("NEWPRESS_NEXORA_SOURCE")
-	if source == "" { t.Fatal("set NEWPRESS_NEXORA_SOURCE via scripts/check_core.py") }
+	if source == "" {
+		t.Fatal("set NEWPRESS_NEXORA_SOURCE via scripts/check_core.py")
+	}
 	if err := extension.CopyTree(t.Context(), source, filepath.Join(root, "nexora")); err != nil {
 		t.Fatal(err)
 	}
@@ -138,17 +140,31 @@ func TestNexoraInteractiveUI(t *testing.T) {
 		t.Fatal(err)
 	}
 	repository := content.NewMemoryRepository(false)
+	var fixturePosts []int64
 	for index, title := range []string{"让创新走出实验室，走进每一个真实场景", "以开放协作，连接产业发展的新可能", "面向未来，探索更可持续的技术路径"} {
-		_, err := repository.Create(t.Context(), content.PostInput{Type: content.TypePost, Status: content.StatusPublish, Slug: []string{"innovation-in-action", "connected-future", "sustainable-technology"}[index], Title: title, Excerpt: "从一个想法出发，让技术的价值在实践中被看见。我们持续探索科技与产业交汇的更多可能。", AuthorName: "NEXORA", Category: "企业动态", ContentSource: "<p>创新的意义，在于为真实世界带来积极的改变。</p><h2>从技术出发，向价值前行</h2><p>我们关注技术，也关注使用技术的人。通过开放协作，将研究与实践连接起来，回应产业发展的真实需求。</p><blockquote>每一次向前，都始于一次有价值的探索。</blockquote><p>这是一篇隔离预览环境中的示例文章，可通过 NewPress 后台编辑、发布和管理。</p>", CommentStatus: "open", PublishedAt: time.Date(2026, 11, 16-index, 9, 0, 0, 0, time.UTC)})
+		post, err := repository.Create(t.Context(), content.PostInput{Type: content.TypePost, Status: content.StatusPublish, Slug: []string{"innovation-in-action", "connected-future", "sustainable-technology"}[index], Title: title, Excerpt: "从一个想法出发，让技术的价值在实践中被看见。我们持续探索科技与产业交汇的更多可能。", AuthorName: "NEXORA", Category: "企业动态", ContentSource: "<p>创新的意义，在于为真实世界带来积极的改变。</p><h2>从技术出发，向价值前行</h2><p>我们关注技术，也关注使用技术的人。通过开放协作，将研究与实践连接起来，回应产业发展的真实需求。</p><h3>协作与验证</h3><p>围绕项目需求安排功能验证，记录验证结果并持续改进。</p><blockquote>每一次向前，都始于一次有价值的探索。</blockquote><h2>下一阶段</h2><p>整理项目反馈并规划后续工作。</p><p>这是一篇隔离预览环境中的示例文章，可通过 NewPress 后台编辑、发布和管理。</p>", CommentStatus: "open", PublishedAt: time.Date(2026, 11, 16-index, 9, 0, 0, 0, time.UTC)})
 		if err != nil {
 			t.Fatal(err)
 		}
+		fixturePosts = append(fixturePosts, post.ID)
+	}
+	_, err = repository.SaveSeries(t.Context(), 0, content.Mutation{}, content.SeriesInput{Kind: content.SeriesKindSequence, Status: content.StatusPublish, Title: "技术与实践", Slug: "technology-in-practice", Description: "从研发探索到项目应用，按顺序阅读企业技术实践。", PostIDs: fixturePosts})
+	if err != nil {
+		t.Fatal(err)
 	}
 	_, err = repository.Create(t.Context(), content.PostInput{Type: content.TypePage, Status: content.StatusPublish, Slug: "company", Title: "以科技之名，探索更大的未来", ContentSource: "<h2>关于我们</h2><p>以专业构筑信任，用创新驱动未来。</p>"})
 	if err != nil {
 		t.Fatal(err)
 	}
 	s := New(config.Config{SiteTitle: "NEXORA", SiteTagline: "以科技之名，探索更大的未来。", PublicURL: "http://127.0.0.1:19106", ActiveTheme: "nexora"}, repository, m, plugin.NewManager(t.TempDir()), identity)
+	snapshot := s.siteSettings.Snapshot()
+	snapshot.Settings.Discussion.RequireLogin = false
+	if _, fields, err := s.siteSettings.Save(snapshot.Revision, snapshot.Settings); err != nil || len(fields) > 0 {
+		t.Fatal(fields, err)
+	}
+	if _, err := s.comments.Create(t.Context(), comment.CreateInput{PostID: fixturePosts[0], AuthorName: "企业读者", AuthorEmail: "reader@example.test", ContentSource: "期待了解更多项目实施与技术验证的细节。", Status: comment.StatusApproved}); err != nil {
+		t.Fatal(err)
+	}
 	listener, err := net.Listen("tcp", "127.0.0.1:19106")
 	if err != nil {
 		t.Fatal(err)

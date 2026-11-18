@@ -20,12 +20,7 @@
 <body class="nexora kind-{{.Kind}} {{.ThemeClass}}">
   <a class="skip-link" href="#main">跳到正文</a>
   {{template "header" .}}
-  <main id="main">{{template "content" .}}</main>
+  <main id="main" tabindex="-1">{{template "content" .}}</main>
   {{template "footer" .}}
-  <dialog class="search-dialog" id="site-search" aria-labelledby="search-title">
-    <div class="search-dialog-inner"><button class="icon-button search-close" type="button" data-search-close aria-label="关闭搜索">{{template "icon-close" .}}</button>
-      <p class="eyebrow">FIND YOUR INSPIRATION</p><h2 id="search-title">探索更多可能</h2>
-      <form action="/explore/" method="get" role="search"><label class="sr-only" for="overlay-query">搜索新闻与文章</label><input id="overlay-query" name="q" type="search" maxlength="200" placeholder="搜索新闻与文章" required><button class="icon-button" type="submit" aria-label="提交搜索">{{template "icon-search" .}}</button></form>
-    </div>
-  </dialog>
+  {{template "search-dialog" .}}
 </body></html>{{end}}
