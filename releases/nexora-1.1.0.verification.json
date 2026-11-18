@@ -1,0 +1,68 @@
+{
+  "verified_at": "2026-11-18T00:55:31.129717+00:00",
+  "transport": "anonymous HTTPS with TLS verification through local proxy",
+  "results": [
+    {
+      "source": "GitHub",
+      "catalog_url": "https://raw.githubusercontent.com/Orangefen/NewPress_Theme/main/catalog.themes-v1.json",
+      "sequence": 4,
+      "signature_verified": true,
+      "catalog_matches_local": true,
+      "files": [
+        {
+          "path": "packages/themes/nexora-1.1.0.zip",
+          "bytes": 686233,
+          "sha256": "5dbb43bd9d49dbe6570edea3aa9b87db9c777255225e12bf6aba7142e5bf8dbd"
+        },
+        {
+          "path": "previews/themes/nexora-1.1.0.webp",
+          "bytes": 134090,
+          "sha256": "c7c09ada7e97f38cab55bab369ce5f1b4bd4b7ff2ca54e91077c07ed9eb378de"
+        }
+      ]
+    },
+    {
+      "source": "Gitee",
+      "catalog_url": "https://gitee.com/chunyangnet_0/NewPress_Theme/raw/main/catalog.themes-v1.json",
+      "sequence": 4,
+      "signature_verified": true,
+      "catalog_matches_local": true,
+      "files": [
+        {
+          "path": "packages/themes/nexora-1.1.0.zip",
+          "bytes": 686233,
+          "sha256": "5dbb43bd9d49dbe6570edea3aa9b87db9c777255225e12bf6aba7142e5bf8dbd"
+        },
+        {
+          "path": "previews/themes/nexora-1.1.0.webp",
+          "bytes": 134090,
+          "sha256": "c7c09ada7e97f38cab55bab369ce5f1b4bd4b7ff2ca54e91077c07ed9eb378de"
+        }
+      ]
+    }
+  ],
+  "slug": "nexora",
+  "version": "1.1.0",
+  "status": "published-and-verified",
+  "catalog_sequence": 4,
+  "source_package_files": 68,
+  "source_package_identical": true,
+  "frontend_tests_passed": 63,
+  "fixture_renders_passed": 54,
+  "interactive_browser_suite_this_release": "not run; fixture-only skipped",
+  "market_client": {
+    "cover_mime": "image/webp",
+    "cover_verified": true,
+    "installed": true,
+    "receipt_verified": true,
+    "sequence": 4,
+    "sha256": "5dbb43bd9d49dbe6570edea3aa9b87db9c777255225e12bf6aba7142e5bf8dbd",
+    "signature_verified": true,
+    "source": "https://gitee.com/chunyangnet_0/NewPress_Theme/raw/main/catalog.themes-v1.json",
+    "templates_loaded": true,
+    "transport": "unmodified NewPress market client, default network",
+    "verified_at": "2026-11-18T00:56:28.3641483Z",
+    "version": "1.1.0"
+  },
+  "github_market_client": "Direct refresh failed on local network; actual HTTPS downloads and signature/hash checks passed via local proxy."
+}

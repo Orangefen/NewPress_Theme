@@ -9,5 +9,5 @@
   "catalog": "catalog.themes-v1.json",
   "catalog_sequence": 4,
   "published_at": "2026-11-18T00:45:34Z",
-  "verification": "GitHub and Gitee raw catalog and package HTTP 200 checks verified"
+  "verification": "releases/nexora-1.1.0.verification.json"
 }
